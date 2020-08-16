@@ -3,23 +3,26 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 const server = require("http").createServer(app);
+const cors = require("cors");
+
+app.use(cors());
 
 server.listen(process.env.PORT || 9000);
 
 app.use(
   express.static(
-    path.join(__dirname, "client/build")
+    path.join(__dirname, "build")
   )
 );
 app.use(
-  bodyParser.urlencoded({ extended: false })
+  bodyParser.urlencoded({ extended: true })
 );
 app.use(bodyParser.json());
 app.get("*", function (req, res) {
   res.sendFile(
     path.join(
       __dirname,
-      "client/build",
+      "build",
       "index.html"
     )
   );
@@ -32,3 +35,5 @@ app.get("/", (req, res) => {
 app.post("/send", (req, res) => {
   console.log("Send");
   console.log(req.body);
+  res.send({ name: req.body.foo });
+});
