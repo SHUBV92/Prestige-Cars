@@ -11,18 +11,18 @@ server.listen(process.env.PORT || 9000);
 
 app.use(
   express.static(
-    path.join(__dirname, "build")
+    path.join(__dirname, "client/build")
   )
 );
 app.use(
   bodyParser.urlencoded({ extended: true })
 );
 app.use(bodyParser.json());
-app.get("*", function (req, res) {
+app.get("/", function (req, res) {
   res.sendFile(
     path.join(
       __dirname,
-      "build",
+      "client/build",
       "index.html"
     )
   );
