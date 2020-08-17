@@ -11,7 +11,7 @@ server.listen(process.env.PORT || 9000);
 
 app.use(
   express.static(
-    path.join(__dirname, "client/build")
+    path.join(__dirname, "client")
   )
 );
 app.use(
@@ -22,7 +22,7 @@ app.get("/", function (req, res) {
   res.sendFile(
     path.join(
       __dirname,
-      "client/build",
+      "client",
       "index.html"
     )
   );
